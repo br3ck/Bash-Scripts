@@ -11,13 +11,13 @@ REBOOT="$(/Library/Application\ Support/JAMF/bin/jamfHelper.app/Contents/MacOS/j
 You may click the button below to install updates and restart now, or your computer will restart automatically in 5 minutes to complete the installation." -windowType utility -title "$TITLE" -button1 "Restart Now" -defaultButton 1 -timeout $TIMEOUT -countdown -icon "$ICON")"
 
 if [[ $REBOOT -eq "1" ]]; then
-	echo "User chose to restart now"
-	softwareupdate -ia
+    echo "User chose to restart now"
+    softwareupdate -ia
     sleep 10
     reboot
 else
-	echo "User prompt timed out, restarting"
-	softwareupdate -ia
+    echo "User prompt timed out, restarting"
+    softwareupdate -ia
     sleep 10
     reboot
 fi
