@@ -1,0 +1,58 @@
+#!/bin/bash
+
+## SET VARIABLES ##
+
+## URL FOR O365 PKG DOWNLOAD ##
+
+url='https://go.microsoft.com/fwlink/p/?linkid=525133'
+
+## SET APPLICATIONS TO BE REMOVED FROM INSTALL ##
+## HINT: OUTLOOK ##
+
+donotwant0=""
+donotwant1=""
+donotwant2=""
+
+## SETTING CURRENT LOGGED-IN USER ##
+
+fbuser=`stat -f%Su /dev/console`
+
+## DOWNLOAD O365 PKG ##
+
+echo "Downloading Office 365 media from https://www.microsoft.com"
+
+mkdir /tmp/O365
+
+cd /tmp/O365
+
+## DOWNLOADING Office 365##
+
+curl -O -J -L $url
+
+## CAPTURING O365 PKG NAME AS VARIABLE ##
+
+package=`ls /tmp/O365`
+
+echo "Installing $package..."
+
+sudo installer -pkg "/tmp/O365/$package" -target /
+
+echo "Install Complete"
+
+## CLEANUP ##
+
+echo "Cleaning Up Before Exiting"
+
+rm -rf /tmp/O365/
+
+rm /Applications/$donotwant0
+
+rm /Applications/$donotwant1
+
+rm /Applications/$donotwant2
+
+echo "Cleanup Complete, Now Exiting."
+
+echo "Microsoft Office 365 Installled Successfully"
+
+exit 0
